@@ -43,20 +43,13 @@ class CustomView: UIView {
             gravity.magnitude = 1.5
             animator.addBehavior(gravity)
             
-            attachment = swingAttachment(swingingView)
+            attachment = UIAttachmentBehavior(item: swingingView,
+                offsetFromCenter: UIOffset(horizontal: 0, vertical: swingingView.frame.size.height / -2),
+                attachedToAnchor: CGPoint(x: self.bounds.size.width / 2, y: 0))
+            attachment.length = CGFloat(250.0)
             animator.addBehavior(attachment)
         }
         
         animator.updateItemUsingCurrentState(swingingView)
-    }
-    
-    let Springlength = CGFloat(250.0)
-    
-    private func swingAttachment(view: UIView) -> UIAttachmentBehavior {
-        let attachment = UIAttachmentBehavior(item: view, offsetFromCenter: UIOffset(horizontal: 0, vertical: view.frame.size.height / -2),
-            attachedToAnchor: CGPoint(x: self.bounds.size.width / 2, y: 0))
-        attachment.length = Springlength
-        
-        return attachment
     }
 }
